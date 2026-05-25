@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Home - Shoe Store{% endblock %}
+
+{% block content %}
+
+<section class="nike-hero">
+
+    <div class="hero-content">
+        <h1>WALK THE FUTURE</h1>
+        <p>Find your perfect pair. Performance. Style. Comfort.</p>
+
+        <a href="#products" class="hero-btn">Shop Now</a>
+    </div>
+
+</section>
+
+<section class="nike-section">
+
+    <div class="section-top">
+        <h2>Latest Shoes</h2>
+        <span>{{ products|length }} Products</span>
+    </div>
+
+    <div class="nike-scroll">
+
+        {% for product in products %}
+        <div class="nike-card">
+
+            <div class="img-box">
+                {% if product.image %}
+                <img src="{{ product.image.url }}">
+                {% else %}
+                <img src="https://via.placeholder.com/400">
+                {% endif %}
+            </div>
+
+            <h3>{{ product.name }}</h3>
+
+            <p class="desc">{{ product.description|truncatewords:10 }}</p>
+
+            <div class="bottom">
+                <span class="price">₹{{ product.price }}</span>
+
+                <a href="{% url 'product_detail' product.id %}">
+                    Buy
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

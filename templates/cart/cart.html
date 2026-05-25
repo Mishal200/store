@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<div class="cart-page">
+    <div class="cart-container">
+
+        <!-- HEADER -->
+        <div class="cart-header">
+            <div class="cart-icon">🛒</div>
+            <h1>Shopping Cart</h1>
+            <p>Review your selected items before proceeding to checkout.</p>
+        </div>
+
+        {% if cart_items %}
+
+            <!-- CART TABLE -->
+            <div class="cart-table-wrapper">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Subtotal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in cart_items %}
+                        <tr>
+
+                            <!-- PRODUCT INFO -->
+                            <td class="product-cell">
+                                <img src="{{ item.product.image.url }}"
+                                     alt="{{ item.product.name }}"
+                                     class="product-image">
+
+                                <div class="product-info">
+                                    <h3>{{ item.product.name }}</h3>
+                                    <p>{{ item.product.brand }}</p>
+                                </div>
+                            </td>
+
+                            <!-- PRICE -->
+                            <td>₹{{ item.product.price }}</td>
+
+                            <!-- QUANTITY -->
+                            <td>{{ item.quantity }}</td>
+
+                            <!-- SUBTOTAL -->
+                            <td class="subtotal">
+                                ₹{{ item.subtotal }}
+                            </td>
+
+                            <!-- REMOVE BUTTON (FIXED) -->
+                            <td>
+                                <a href="{% url 'remove_from_cart' item.product.id %}"
+                                   class="remove-btn">
+                                    Remove
+                                </a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="cart-footer">
+
+                <div class="total-box">
+                    <span>Total Amount</span>
+                    <strong>₹{{ total }}</strong>
+                </div>
+
+                <div class="cart-actions">
+                    <a href="{% url 'home' %}" class="continue-btn">
+                        ← Continue Shopping
+                    </a>
+
+                    <a href="{% url 'checkout' %}" class="checkout-btn">
+                        Proceed to Checkout →
+                    </a>
+                </div>
+
+            </div>
+
+        {% else %}
+
+            <!-- EMPTY CART -->
+            <div class="empty-cart">
+                <div class="empty-icon">🛍️</div>
+                <h2>Your Cart is Empty</h2>
+                <p>Add your favorite shoes to get started.</p>
+
+                <a href="{% url 'home' %}" class="shop-now-btn">
+                    Start Shopping
+                </a>
+            </div>
+
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

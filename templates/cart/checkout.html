@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+<div style="max-width: 800px; margin: auto; padding: 20px;">
+
+    <h2 style="text-align:center; margin-bottom:20px;">Checkout Page</h2>
+
+    <!-- CART ITEMS -->
+    <div>
+        {% for item in cart_items %}
+            <div style="display:flex; justify-content:space-between;
+                        padding:15px; margin-bottom:10px;
+                        border:1px solid #ddd; border-radius:10px;
+                        background:#fafafa;">
+
+                <div>
+                    <h4 style="margin:0;">{{ item.product.name }}</h4>
+                    <small>Quantity: {{ item.quantity }}</small>
+                </div>
+
+                <div>
+                    <b>₹{{ item.subtotal|floatformat:2 }}</b>
+                </div>
+
+            </div>
+        {% empty %}
+            <p>Your cart is empty</p>
+        {% endfor %}
+    </div>
+
+    <!-- SUMMARY -->
+    <div style="margin-top:20px; padding:20px;
+                border:1px solid #ccc; border-radius:10px;
+                background:white;">
+
+        <p><b>Subtotal:</b> ₹{{ subtotal|floatformat:2 }}</p>
+        <p><b>Shipping:</b> ₹{{ shipping|floatformat:2 }}</p>
+        <p><b>Tax:</b> ₹{{ tax|floatformat:2 }}</p>
+
+        <hr>
+
+        <h3><b>Total: ₹{{ total|floatformat:2 }}</b></h3>
+
+        <button style="width:100%; padding:10px;
+                       background:green; color:white;
+                       border:none; border-radius:8px;
+                       margin-top:10px;">
+            Place Order
+        </button>
+
+    </div>
+
+</div>
+
+{% endblock %}

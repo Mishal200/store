@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order Success{% endblock %}
+
+{% block content %}
+<div class="order-success-page">
+    <div class="success-card">
+
+      
+        <div class="success-icon">✅</div>
+
+      
+        <h1>Order Placed Successfully!</h1>
+        <p class="subtitle">
+            Thank you for shopping with us. Your order has been placed successfully.
+        </p>
+
+       
+        <div class="order-details">
+            <div class="detail-row">
+                <span>📦 Order Number</span>
+                <strong>{{ order.order_number }}</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>💰 Total Amount</span>
+                <strong>₹{{ order.total_amount }}</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>🚚 Status</span>
+                <span class="status-badge">{{ order.status }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span>📅 Order Date</span>
+                <strong>{{ order.created_at|date:"d M Y, h:i A" }}</strong>
+            </div>
+        </div>
+
+       
+        <div class="action-buttons">
+            <a href="{% url 'track_order' %}?order_number={{ order.order_number }}"
+               class="btn-primary">
+                📍 Track Your Order
+            </a>
+
+            <a href="{% url 'home' %}" class="btn-secondary">
+                🛍️ Continue Shopping
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,299 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #111;
+  
+
+}
+
+
+.nike-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+.brand {
+    font-size: 22px;
+    font-weight: 900;
+    text-decoration: none;
+    color: #111;
+    letter-spacing: 2px;
+}
+
+.brand span {
+    color: #777;
+    font-weight: 400;
+}
+
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #111;
+    font-size: 14px;
+    position: relative;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: #111;
+    transition: 0.3s;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.search-box input {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 13px;
+}
+
+
+.icon-btn {
+    text-decoration: none;
+    font-size: 18px;
+    color: #111;
+}
+
+
+.user {
+    font-size: 13px;
+}
+
+
+.login-btn,
+.logout-btn {
+    background: #000;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.login-btn:hover,
+.logout-btn:hover {
+    background: #333;
+}
+
+
+.logout-form {
+    display: inline;
+}
+
+
+.nike-hero {
+    height: 85vh;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 80px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+.hero-content p {
+    margin: 15px 0 25px;
+    color: #ccc;
+    font-size: 18px;
+}
+
+.hero-btn {
+    background: #fff;
+    color: #000;
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    background: #ddd;
+}
+
+
+.nike-section {
+    padding: 60px 40px;
+}
+
+
+.section-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-top h2 {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+.nike-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    scroll-snap-type: x mandatory;
+}
+
+
+.nike-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+
+.nike-card {
+    min-width: 280px;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    transition: 0.3s;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+.nike-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+
+.img-box {
+    height: 250px;
+    overflow: hidden;
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+.nike-card:hover img {
+    transform: scale(1.05);
+}
+
+
+.nike-card h3 {
+    margin: 12px 15px 5px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.desc {
+    font-size: 13px;
+    color: #666;
+    padding: 0 15px;
+}
+
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+
+.price {
+    font-weight: 800;
+}
+
+
+.bottom a {
+    background: #000;
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.bottom a:hover {
+    background: #333;
+}
+
+
+
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    font-size: 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+
+.btn-success {
+    background: #28a745;
+    color: #fff;
+    border: none;
+}
+
+
+.btn-outline-danger {
+    background: #fff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+
+.btn-secondary {
+    background: #6c757d;
+    color: #fff;
+    border: none;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 320px;  
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
