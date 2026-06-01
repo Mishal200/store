@@ -2,10 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from products.models import Product
 
-
-# -------------------------
-# ADD TO CART (NO LOGIN)
-# -------------------------
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
@@ -22,10 +18,6 @@ def add_to_cart(request, product_id):
 
     return redirect('cart')
 
-
-# -------------------------
-# CART VIEW (NO LOGIN)
-# -------------------------
 def cart_view(request):
     cart = request.session.get('cart', {})
 
@@ -50,10 +42,6 @@ def cart_view(request):
         'total': total
     })
 
-
-# -------------------------
-# REMOVE FROM CART (NO LOGIN)
-# -------------------------
 def remove_from_cart(request, item_id):
     cart = request.session.get('cart', {})
 
@@ -65,10 +53,6 @@ def remove_from_cart(request, item_id):
 
     return redirect('cart')
 
-
-# -------------------------
-# CHECKOUT (LOGIN REQUIRED)
-# -------------------------
 def checkout(request):
     cart = request.session.get('cart', {})
 

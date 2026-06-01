@@ -7,7 +7,6 @@
 <div class="cart-page">
     <div class="cart-container">
 
-        <!-- HEADER -->
         <div class="cart-header">
             <div class="cart-icon">🛒</div>
             <h1>Shopping Cart</h1>
@@ -16,7 +15,6 @@
 
         {% if cart_items %}
 
-            <!-- CART TABLE -->
             <div class="cart-table-wrapper">
                 <table class="cart-table">
                     <thead>
@@ -33,7 +31,6 @@
                         {% for item in cart_items %}
                         <tr>
 
-                            <!-- PRODUCT INFO -->
                             <td class="product-cell">
                                 <img src="{{ item.product.image.url }}"
                                      alt="{{ item.product.name }}"
@@ -45,18 +42,14 @@
                                 </div>
                             </td>
 
-                            <!-- PRICE -->
                             <td>₹{{ item.product.price }}</td>
 
-                            <!-- QUANTITY -->
                             <td>{{ item.quantity }}</td>
 
-                            <!-- SUBTOTAL -->
                             <td class="subtotal">
                                 ₹{{ item.subtotal }}
                             </td>
 
-                            <!-- REMOVE BUTTON (FIXED) -->
                             <td>
                                 <a href="{% url 'remove_from_cart' item.product.id %}"
                                    class="remove-btn">
@@ -70,7 +63,6 @@
                 </table>
             </div>
 
-            <!-- FOOTER -->
             <div class="cart-footer">
 
                 <div class="total-box">
@@ -92,7 +84,6 @@
 
         {% else %}
 
-            <!-- EMPTY CART -->
             <div class="empty-cart">
                 <div class="empty-icon">🛍️</div>
                 <h2>Your Cart is Empty</h2>

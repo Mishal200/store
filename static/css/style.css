@@ -3,10 +3,7 @@ body {
     font-family: Arial, sans-serif;
     background: #fff;
     color: #111;
-  
-
 }
-
 
 .nike-navbar {
     display: flex;
@@ -20,7 +17,6 @@ body {
     z-index: 1000;
 }
 
-
 .brand {
     font-size: 22px;
     font-weight: 900;
@@ -33,7 +29,6 @@ body {
     color: #777;
     font-weight: 400;
 }
-
 
 .menu {
     display: flex;
@@ -62,13 +57,11 @@ body {
     width: 100%;
 }
 
-
 .nav-right {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-
 
 .search-box input {
     padding: 6px 10px;
@@ -78,18 +71,15 @@ body {
     font-size: 13px;
 }
 
-
 .icon-btn {
     text-decoration: none;
     font-size: 18px;
     color: #111;
 }
 
-
 .user {
     font-size: 13px;
 }
-
 
 .login-btn,
 .logout-btn {
@@ -108,11 +98,9 @@ body {
     background: #333;
 }
 
-
 .logout-form {
     display: inline;
 }
-
 
 .nike-hero {
     height: 85vh;
@@ -152,11 +140,9 @@ body {
     background: #ddd;
 }
 
-
 .nike-section {
     padding: 60px 40px;
 }
-
 
 .section-top {
     display: flex;
@@ -170,7 +156,6 @@ body {
     font-weight: 800;
 }
 
-
 .nike-scroll {
     display: flex;
     gap: 20px;
@@ -179,11 +164,9 @@ body {
     scroll-snap-type: x mandatory;
 }
 
-
 .nike-scroll::-webkit-scrollbar {
     display: none;
 }
-
 
 .nike-card {
     min-width: 280px;
@@ -199,7 +182,6 @@ body {
     transform: translateY(-8px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
-
 
 .img-box {
     height: 250px;
@@ -217,7 +199,6 @@ body {
     transform: scale(1.05);
 }
 
-
 .nike-card h3 {
     margin: 12px 15px 5px;
     font-size: 16px;
@@ -230,7 +211,6 @@ body {
     padding: 0 15px;
 }
 
-
 .bottom {
     display: flex;
     justify-content: space-between;
@@ -238,11 +218,9 @@ body {
     padding: 15px;
 }
 
-
 .price {
     font-weight: 800;
 }
-
 
 .bottom a {
     background: #000;
@@ -257,8 +235,6 @@ body {
     background: #333;
 }
 
-
-
 .btn {
     display: inline-block;
     padding: 10px 16px;
@@ -268,20 +244,17 @@ body {
     margin-right: 8px;
 }
 
-
 .btn-success {
     background: #28a745;
     color: #fff;
     border: none;
 }
 
-
 .btn-outline-danger {
     background: #fff;
     color: #dc3545;
     border: 1px solid #dc3545;
 }
-
 
 .btn-secondary {
     background: #6c757d;
@@ -291,9 +264,80 @@ body {
 
 .product-image {
     width: 100%;
-    max-width: 320px;  
+    max-width: 320px;
     height: auto;
     object-fit: cover;
     border-radius: 8px;
 }
 
+.product-detail {
+    display: flex;
+    gap: 50px;
+    padding: 70px 60px;
+    align-items: center;
+}
+
+.product-detail-left,
+.product-detail-right {
+    flex: 1;
+}
+
+.product-detail-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-detail-left img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-detail-left img:hover {
+    transform: scale(1.03);
+}
+
+.product-detail-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-title {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.product-brand {
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.product-description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.product-stock {
+    margin-bottom: 25px;
+}
+
+.product-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}

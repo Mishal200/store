@@ -24,7 +24,7 @@ class Order(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        # Generate order number automatically
+     
         if not self.order_number:
             last_id = Order.objects.count() + 1
             self.order_number = f"ORD{1000 + last_id}"

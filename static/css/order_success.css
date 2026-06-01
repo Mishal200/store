@@ -7,7 +7,6 @@
     background: linear-gradient(135deg, #f8fafc, #eef2ff);
 }
 
-
 .success-card {
     background: #ffffff;
     max-width: 700px;
@@ -17,7 +16,6 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
     text-align: center;
 }
-
 
 .success-icon {
     font-size: 80px;
@@ -36,7 +34,6 @@
     }
 }
 
-
 .success-card h1 {
     font-size: 42px;
     font-weight: 700;
@@ -49,7 +46,6 @@
     font-size: 16px;
     margin-bottom: 35px;
 }
-
 
 .order-details {
     background: #f9fafb;
@@ -81,7 +77,6 @@
     font-weight: 600;
 }
 
-
 .status-badge {
     background: #fef3c7;
     color: #92400e;
@@ -90,7 +85,6 @@
     font-size: 14px;
     font-weight: 600;
 }
-
 
 .action-buttons {
     display: flex;
@@ -107,7 +101,6 @@
     transition: all 0.3s ease;
 }
 
-
 .btn-primary {
     background: #111827;
     color: #ffffff;
@@ -117,7 +110,6 @@
     background: #000000;
     transform: translateY(-2px);
 }
-
 
 .btn-secondary {
     background: #f3f4f6;

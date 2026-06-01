@@ -31,14 +31,12 @@
                             <p class="fw-bold text-success">
                                 ₹{{ product.price }}
                             </p>
-
-                            <!-- ADD TO CART -->
+->
                             <a href="{% url 'add_to_cart' product.id %}"
                                class="btn btn-success btn-sm">
                                 Add to Cart
                             </a>
 
-                            <!-- REMOVE FROM WISHLIST -->
                             <a href="{% url 'remove_from_wishlist' product.id %}"
                                class="btn btn-danger btn-sm">
                                 Remove
