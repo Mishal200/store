@@ -130,12 +130,13 @@
             Select your preferred payment method.
         </p>
 
-        <form method="POST">
+        <form method="POST" id="paymentForm">
             {% csrf_token %}
 
+            <!-- COD -->
             <div class="payment-option">
                 <input type="radio" id="cod" name="payment_method"
-                       value="Cash on Delivery" required>
+                       value="COD" required>
 
                 <label for="cod" class="payment-label">
 
@@ -143,24 +144,18 @@
                         <div class="payment-icon">💵</div>
 
                         <div>
-                            <div class="payment-name">
-                                Cash on Delivery
-                            </div>
-
-                            <div class="payment-desc">
-                                Pay when your order arrives
-                            </div>
+                            <div class="payment-name">Cash on Delivery</div>
+                            <div class="payment-desc">Pay when your order arrives</div>
                         </div>
                     </div>
-
-                    <div class="checkmark"></div>
 
                 </label>
             </div>
 
+            <!-- UPI -->
             <div class="payment-option">
                 <input type="radio" id="upi" name="payment_method"
-                       value="UPI">
+                       value="RAZORPAY">
 
                 <label for="upi" class="payment-label">
 
@@ -168,24 +163,18 @@
                         <div class="payment-icon">📱</div>
 
                         <div>
-                            <div class="payment-name">
-                                UPI
-                            </div>
-
-                            <div class="payment-desc">
-                                Google Pay, PhonePe, Paytm & more
-                            </div>
+                            <div class="payment-name">UPI</div>
+                            <div class="payment-desc">Google Pay, PhonePe, Paytm & more</div>
                         </div>
                     </div>
-
-                    <div class="checkmark"></div>
 
                 </label>
             </div>
 
+            <!-- CARD -->
             <div class="payment-option">
                 <input type="radio" id="card" name="payment_method"
-                       value="Debit / Credit Card">
+                       value="RAZORPAY">
 
                 <label for="card" class="payment-label">
 
@@ -193,23 +182,16 @@
                         <div class="payment-icon">💳</div>
 
                         <div>
-                            <div class="payment-name">
-                                Debit / Credit Card
-                            </div>
-
-                            <div class="payment-desc">
-                                Visa, Mastercard, RuPay
-                            </div>
+                            <div class="payment-name">Debit / Credit Card</div>
+                            <div class="payment-desc">Visa, Mastercard, RuPay</div>
                         </div>
                     </div>
-
-                    <div class="checkmark"></div>
 
                 </label>
             </div>
 
             <button type="submit" class="place-order-btn">
-               proceed to pay
+                Proceed to Pay
             </button>
 
         </form>
@@ -221,5 +203,40 @@
     </div>
 
 </div>
+
+<!-- Razorpay JS -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+document.getElementById("paymentForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let method = document.querySelector('input[name="payment_method"]:checked').value;
+
+    // COD FLOW
+    if(method === "COD"){
+        window.location.href = "/orders/order-success/";
+        return;
+    }
+
+    // RAZORPAY FLOW
+    var options = {
+        "key": "{{ razorpay_key }}",
+        "amount": "{{ payment.amount }}",
+        "currency": "INR",
+        "name": "Shoestore",
+        "description": "Order Payment",
+        "order_id": "{{ payment.id }}",
+
+        "handler": function (response){
+            window.location.href = "/orders/order-success/";
+        }
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+});
+</script>
 
 {% endblock %}

@@ -2,7 +2,39 @@ from django.shortcuts import render, get_object_or_404, redirect
 from products.models import Product
 from decimal import Decimal
 from datetime import datetime
+import razorpay
+from django.conf import settings
 
+
+def payment_page(request):
+
+    # Get real total from checkout session
+    amount = Decimal(request.session.get('total', '0'))
+
+    # Safety check
+    if amount <= 0:
+        return redirect('checkout')
+
+    client = razorpay.Client(
+        auth=(
+            settings.RAZORPAY_KEY_ID,
+            settings.RAZORPAY_KEY_SECRET
+        )
+    )
+
+    payment = client.order.create({
+        "amount": int(amount * 100),  # Razorpay uses paise
+        "currency": "INR",
+        "payment_capture": "1"
+    })
+
+    context = {
+        "payment": payment,
+        "amount": amount,
+        "razorpay_key": settings.RAZORPAY_KEY_ID
+    }
+
+    return render(request, "orders/payment.html", context)
 
 def checkout(request):
     cart = request.session.get('cart', {})
@@ -92,3 +124,9 @@ def track_order(request):
     return render(request, 'orders/track_order.html', {
         'order': order
     })
+
+def payment_success(request):
+    return render(
+        request,
+        "orders/payment_success.html"
+    )
