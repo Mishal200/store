@@ -43,13 +43,15 @@
 
         <h3><b>Total: ₹{{ total|floatformat:2 }}</b></h3>
 
-        <button style="width:100%; padding:10px;
+        <!-- <button style="width:100%; padding:10px;
                        background:green; color:white;
                        border:none; border-radius:8px;
                        margin-top:10px;">
             Place Order
-        </button>
-
+        </button> -->
+ <a href="{% url 'order_success' %}" class="place-order-btn">
+    Place Order
+</a>
     </div>
 
 </div>

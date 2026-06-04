@@ -13,7 +13,6 @@ urlpatterns = [
     path('wishlist/', include('wishlist.urls')),
 
     path('orders/', include('orders.urls')),
-
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 

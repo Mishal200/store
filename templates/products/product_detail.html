@@ -15,6 +15,8 @@
 
     </div>
 
+   
+
     <div class="product-detail-right">
 
         <h1 class="product-title">{{ product.name }}</h1>
@@ -24,6 +26,13 @@
         <p class="product-description">
             {{ product.description }}
         </p>
+         <h4>Select Size</h4>
+
+    <div class="size-options">
+        {% for size in sizes %}
+            <button class="size-btn">{{ size }}</button>
+        {% endfor %}
+    </div>
 
         <h2 class="product-price">₹ {{ product.price }}</h2>
 

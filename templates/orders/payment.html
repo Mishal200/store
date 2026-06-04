@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment{% endblock %}
+
+{% block content %}
+
+<style>
+.payment-page{
+    max-width:900px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.payment-card{
+    background:#fff;
+    padding:40px;
+    border-radius:16px;
+    box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
+
+.payment-title{
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.payment-subtitle{
+    color:#666;
+    margin-bottom:30px;
+}
+
+.payment-option{
+    margin-bottom:15px;
+}
+
+.payment-option input{
+    display:none;
+}
+
+.payment-label{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 25px;
+    border:2px solid #ddd;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.3s;
+    background:#fff;
+}
+
+.payment-label:hover{
+    border-color:#000;
+    transform:translateY(-2px);
+}
+
+.payment-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.payment-icon{
+    font-size:28px;
+}
+
+.payment-name{
+    font-size:18px;
+    font-weight:700;
+}
+
+.payment-desc{
+    font-size:14px;
+    color:#777;
+}
+
+.payment-option input:checked + .payment-label{
+    border-color:#000;
+    background:#f8f8f8;
+}
+
+.checkmark{
+    width:24px;
+    height:24px;
+    border:2px solid #000;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.payment-option input:checked + .payment-label .checkmark::after{
+    content:"✓";
+    font-size:14px;
+    font-weight:bold;
+}
+
+.place-order-btn{
+    width:100%;
+    margin-top:25px;
+    padding:18px;
+    border:none;
+    border-radius:50px;
+    background:#000;
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.place-order-btn:hover{
+    background:#222;
+}
+
+.secure-note{
+    text-align:center;
+    margin-top:15px;
+    color:#666;
+    font-size:14px;
+}
+</style>
+
+<div class="payment-page">
+
+    <div class="payment-card">
+
+        <h1 class="payment-title">Payment</h1>
+        <p class="payment-subtitle">
+            Select your preferred payment method.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="payment-option">
+                <input type="radio" id="cod" name="payment_method"
+                       value="Cash on Delivery" required>
+
+                <label for="cod" class="payment-label">
+
+                    <div class="payment-left">
+                        <div class="payment-icon">💵</div>
+
+                        <div>
+                            <div class="payment-name">
+                                Cash on Delivery
+                            </div>
+
+                            <div class="payment-desc">
+                                Pay when your order arrives
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkmark"></div>
+
+                </label>
+            </div>
+
+            <div class="payment-option">
+                <input type="radio" id="upi" name="payment_method"
+                       value="UPI">
+
+                <label for="upi" class="payment-label">
+
+                    <div class="payment-left">
+                        <div class="payment-icon">📱</div>
+
+                        <div>
+                            <div class="payment-name">
+                                UPI
+                            </div>
+
+                            <div class="payment-desc">
+                                Google Pay, PhonePe, Paytm & more
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkmark"></div>
+
+                </label>
+            </div>
+
+            <div class="payment-option">
+                <input type="radio" id="card" name="payment_method"
+                       value="Debit / Credit Card">
+
+                <label for="card" class="payment-label">
+
+                    <div class="payment-left">
+                        <div class="payment-icon">💳</div>
+
+                        <div>
+                            <div class="payment-name">
+                                Debit / Credit Card
+                            </div>
+
+                            <div class="payment-desc">
+                                Visa, Mastercard, RuPay
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkmark"></div>
+
+                </label>
+            </div>
+
+            <button type="submit" class="place-order-btn">
+               proceed to pay
+            </button>
+
+        </form>
+
+        <div class="secure-note">
+            🔒 Secure checkout powered by Shoestore
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

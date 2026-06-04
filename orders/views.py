@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from products.models import Product
 from decimal import Decimal
+from datetime import datetime
+
 
 def checkout(request):
     cart = request.session.get('cart', {})
@@ -24,7 +26,18 @@ def checkout(request):
     tax = subtotal * Decimal('0.10')
     total = subtotal + shipping + tax
 
-    return render(request, 'cart/checkout.html', {
+    if request.method == 'POST':
+        request.session['customer_name'] = request.POST.get('name')
+        request.session['phone'] = request.POST.get('phone')
+        request.session['address'] = request.POST.get('address')
+        request.session['city'] = request.POST.get('city')
+        request.session['pincode'] = request.POST.get('pincode')
+
+        request.session['total'] = str(total)
+
+        return redirect('payment')
+
+    return render(request, 'orders/checkout.html', {
         'cart_items': cart_items,
         'subtotal': subtotal,
         'shipping': shipping,
@@ -32,17 +45,50 @@ def checkout(request):
         'total': total,
     })
 
+
+def payment(request):
+    if request.method == 'POST':
+        payment_method = request.POST.get('payment_method')
+
+        request.session['payment_method'] = payment_method
+
+        return redirect('order_success')
+
+    return render(request, 'orders/payment.html')
+
+
+def order_success(request):
+    order = {
+        'order_number': 'SHOE12345',
+        'total_amount': request.session.get('total', '0'),
+        'status': 'Confirmed',
+        'payment_method': request.session.get('payment_method', 'COD'),
+        'created_at': datetime.now(),
+        'customer_name': request.session.get('customer_name'),
+        'phone': request.session.get('phone'),
+        'address': request.session.get('address'),
+        'city': request.session.get('city'),
+        'pincode': request.session.get('pincode'),
+    }
+
+    return render(request, 'orders/order_success.html', {
+        'order': order
+    })
+
+
 def track_order(request):
-    order = None
     order_number = request.GET.get('order_number')
 
+    order = None
+
     if order_number:
-        try:
-            order = Order.objects.get(order_number=order_number)
-        except Order.DoesNotExist:
-            order = None
+        order = {
+            'order_number': order_number,
+            'status': 'Shipped',
+            'current_location': 'Kochi Hub',
+            'estimated_delivery': '2 Days'
+        }
 
     return render(request, 'orders/track_order.html', {
-        'order': order,
-        'order_number': order_number,
+        'order': order
     })

@@ -1,53 +1,62 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %}Order Success{% endblock %}
 
 {% block content %}
-<div class="order-success-page">
+
+<style>
+.success-container{
+    max-width:800px;
+    margin:60px auto;
+}
+
+.success-card{
+    text-align:center;
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.success-icon{
+    font-size:80px;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:14px 30px;
+    background:black;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+}
+</style>
+
+<div class="success-container">
+
     <div class="success-card">
-      
+
         <div class="success-icon">✅</div>
-     
+
         <h1>Order Placed Successfully!</h1>
-        <p class="subtitle">
-            Thank you for shopping with us. Your order has been placed successfully.
-        </p>
-      
-        <div class="order-details">
-            <div class="detail-row">
-                <span>📦 Order Number</span>
-                <strong>{{ order.order_number }}</strong>
-            </div>
 
-            <div class="detail-row">
-                <span>💰 Total Amount</span>
-                <strong>₹{{ order.total_amount }}</strong>
-            </div>
+        <p>Thank you for shopping with us.</p>
 
-            <div class="detail-row">
-                <span>🚚 Status</span>
-                <span class="status-badge">{{ order.status }}</span>
-            </div>
+        <h3>Order Number: {{ order.order_number }}</h3>
 
-            <div class="detail-row">
-                <span>📅 Order Date</span>
-                <strong>{{ order.created_at|date:"d M Y, h:i A" }}</strong>
-            </div>
-        </div>
+        <p>Total Amount: ₹{{ order.total_amount }}</p>
 
-       
-        <div class="action-buttons">
-            <a href="{% url 'track_order' %}?order_number={{ order.order_number }}"
-               class="btn-primary">
-                📍 Track Your Order
-            </a>
+        <p>Status: {{ order.status }}</p>
 
-            <a href="{% url 'home' %}" class="btn-secondary">
-                🛍️ Continue Shopping
-            </a>
-        </div>
+        <p>Payment Method: {{ order.payment_method }}</p>
+
+        <a href="{% url 'track_order' %}?order_number={{ order.order_number }}" class="btn">
+            Track Order
+        </a>
 
     </div>
+
 </div>
+
 {% endblock %}

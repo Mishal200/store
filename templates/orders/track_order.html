@@ -1,94 +1,66 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %}Track Order{% endblock %}
 
 {% block content %}
-<div class="tracking-page">
-    <div class="tracking-container">
 
-        <div class="tracking-header">
-            <div class="tracking-icon">📦</div>
-            <h1>Track Your Order</h1>
-            <p>Enter your order number to check the current delivery status.</p>
-        </div>
+<style>
+.track-container{
+    max-width:800px;
+    margin:50px auto;
+}
 
-        <form method="get" class="search-form">
-            <input
-                type="text"
-                name="order_number"
-                placeholder="Enter Order Number (e.g. ORD1007)"
-                value="{{ order_number|default:'' }}"
-                required
-            >
-            <button type="submit">🔍 Track Order</button>
-        </form>
+.track-card{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
 
-        {% if order_number %}
-            {% if order %}
-                
-                <div class="order-card">
+.status{
+    margin-top:20px;
+    font-size:18px;
+}
+</style>
 
-                    <div class="order-number">
-                        📦 Order #{{ order.order_number }}
-                    </div>
+<div class="track-container">
 
-                    <div class="info-row">
-                        <span class="info-label">🚚 Status</span>
-                        <span class="status-badge">
-                            {{ order.status }}
-                        </span>
-                    </div>
+    <div class="track-card">
 
-                    <div class="info-row">
-                        <span class="info-label">💰 Total Amount</span>
-                        <span class="info-value">
-                            ₹{{ order.total_amount }}
-                        </span>
-                    </div>
+        <h2>Track Your Order</h2>
 
-                    <div class="info-row">
-                        <span class="info-label">📅 Ordered On</span>
-                        <span class="info-value">
-                            {{ order.created_at|date:"d M Y, h:i A" }}
-                        </span>
-                    </div>
+        {% if order %}
 
-                    
-                    <div class="tracking-progress">
+            <h3>Order #: {{ order.order_number }}</h3>
 
-                        <div class="step active">
-                            <div class="step-circle">✓</div>
-                            <p>Pending</p>
-                        </div>
+            <div class="status">
+                ✅ Order Confirmed
+            </div>
 
-                        <div class="step {% if order.status != 'Pending' %}active{% endif %}">
-                            <div class="step-circle">✓</div>
-                            <p>Processing</p>
-                        </div>
+            <div class="status">
+                ✅ Packed
+            </div>
 
-                        <div class="step {% if order.status == 'Shipped' or order.status == 'Delivered' %}active{% endif %}">
-                            <div class="step-circle">✓</div>
-                            <p>Shipped</p>
-                        </div>
+            <div class="status">
+                ✅ {{ order.status }}
+            </div>
 
-                        <div class="step {% if order.status == 'Delivered' %}active{% endif %}">
-                            <div class="step-circle">✓</div>
-                            <p>Delivered</p>
-                        </div>
+            <div class="status">
+                📍 Current Location: {{ order.current_location }}
+            </div>
 
-                    </div>
-                </div>
-            {% else %}
-               
-                <div class="not-found">
-                    <div class="not-found-icon">❌</div>
-                    <h3>Order Not Found</h3>
-                    <p>Please check your order number and try again.</p>
-                </div>
-            {% endif %}
+            <div class="status">
+                🚚 Estimated Delivery: {{ order.estimated_delivery }}
+            </div>
+
+        {% else %}
+
+            <p>No order found.</p>
+
         {% endif %}
 
     </div>
+
 </div>
+
 {% endblock %}

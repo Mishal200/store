@@ -20,8 +20,12 @@ def product_list(request):
 
 def product_detail(request, id):
     product = get_object_or_404(Product, id=id, available=True)
+
+    sizes = product.size.split(',')
+
     return render(request, 'products/product_detail.html', {
-        'product': product
+        'product': product,
+        'sizes': sizes,
     })
 
 
