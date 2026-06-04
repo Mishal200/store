@@ -1,63 +1,57 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Track Order{% endblock %}
 
 {% block content %}
 
-<style>
-.track-container{
-    max-width:800px;
-    margin:50px auto;
-}
 
-.track-card{
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-}
 
-.status{
-    margin-top:20px;
-    font-size:18px;
-}
-</style>
+<div class="track-page">
 
-<div class="track-container">
+    <div class="track-box">
 
-    <div class="track-card">
+        <div class="track-header">
+            <h1>Track Order</h1>
+            <span class="order-tag">#{{ order.order_number }}</span>
+        </div>
 
-        <h2>Track Your Order</h2>
+        <div class="progress-wrapper">
 
-        {% if order %}
-
-            <h3>Order #: {{ order.order_number }}</h3>
-
-            <div class="status">
-                ✅ Order Confirmed
+            <div class="progress-step done">
+                <div class="dot"></div>
+                <div class="text">Order Confirmed</div>
             </div>
 
-            <div class="status">
-                ✅ Packed
+            <div class="progress-line"></div>
+
+            <div class="progress-step done">
+                <div class="dot"></div>
+                <div class="text">Packed</div>
             </div>
 
-            <div class="status">
-                ✅ {{ order.status }}
+            <div class="progress-line"></div>
+
+            <div class="progress-step active">
+                <div class="dot"></div>
+                <div class="text">Shipped</div>
             </div>
 
-            <div class="status">
-                📍 Current Location: {{ order.current_location }}
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-card">
+                <div class="label">📍 Current Location</div>
+                <div class="value">{{ order.current_location }}</div>
             </div>
 
-            <div class="status">
-                🚚 Estimated Delivery: {{ order.estimated_delivery }}
+            <div class="info-card highlight">
+                <div class="label">🚚 Delivery</div>
+                <div class="value">{{ order.estimated_delivery }}</div>
             </div>
 
-        {% else %}
-
-            <p>No order found.</p>
-
-        {% endif %}
+        </div>
 
     </div>
 

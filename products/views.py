@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
-from .models import Product
+from .models import Product, Review
+from django.contrib.auth.decorators import login_required
 
 
 def product_list(request):
@@ -23,11 +24,24 @@ def product_detail(request, id):
 
     sizes = product.size.split(',')
 
+    reviews = Review.objects.filter(product=product).order_by('-id')
+
     return render(request, 'products/product_detail.html', {
         'product': product,
         'sizes': sizes,
+        'reviews': reviews
     })
 
+@login_required
+def add_review(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
 
-def wishlist(request):
-    return render(request, 'wishlist/wishlist_detail.html')
+    if request.method == "POST":
+        Review.objects.create(
+            product=product,
+            user=request.user,
+            rating=request.POST.get('rating'),
+            comment=request.POST.get('comment')
+        )
+
+    return redirect('product_detail', id=product_id)

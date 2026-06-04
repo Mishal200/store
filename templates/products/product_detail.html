@@ -8,62 +8,129 @@
 <div class="product-detail">
 
     <div class="product-detail-left">
-
-        <img src="{{ product.image.url }}"
-             alt="{{ product.name }}"
-             class="product-image">
-
+        <img src="{{ product.image.url }}" class="product-image">
     </div>
-
-   
 
     <div class="product-detail-right">
 
-        <h1 class="product-title">{{ product.name }}</h1>
+        <h1>{{ product.name }}</h1>
+        <h4>{{ product.brand }}</h4>
 
-        <h4 class="product-brand">{{ product.brand }}</h4>
+        <p>{{ product.description }}</p>
 
-        <p class="product-description">
-            {{ product.description }}
-        </p>
-         <h4>Select Size</h4>
+        <h4>Select Size</h4>
 
-    <div class="size-options">
-        {% for size in sizes %}
-            <button class="size-btn">{{ size }}</button>
-        {% endfor %}
-    </div>
+        <div class="size-options">
+            {% for size in sizes %}
+            <button type="button" class="size-btn" onclick="selectSize(this, '{{ size }}')">
+                {{ size }}
+            </button>
+            {% endfor %}
+        </div>
 
-        <h2 class="product-price">₹ {{ product.price }}</h2>
+        <input type="hidden" id="form-size">
 
-        <p class="product-stock">
-            <strong>Stock:</strong>
-
-            {% if product.stock > 0 %}
-                <span class="in-stock">In Stock ({{ product.stock }})</span>
-            {% else %}
-                <span class="out-stock">Out of Stock</span>
-            {% endif %}
-        </p>
+        <h2>₹ {{ product.price }}</h2>
 
         <div class="product-buttons">
 
-            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-success">
-                Add to Cart
+            <form method="POST" action="{% url 'add_to_cart' product.id %}" onsubmit="return validateSize()">
+                {% csrf_token %}
+                <input type="hidden" name="size" id="cart-size">
+
+                <button type="submit" class="btn btn-success">
+                    Add to Cart
+                </button>
+            </form>
+
+            <a href="javascript:void(0)" id="buy-now-link" class="btn btn-primary" onclick="goToCheckout()">
+                Buy Now
             </a>
 
             <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-danger">
                 ♥ Wishlist
             </a>
-
-            <a href="{% url 'home' %}" class="btn btn-secondary">
-                ← Back
-            </a>
-
+           <a href="{% url 'home' %}" class="btn btn-outline-danger back-btn">
+    ← Back to Products
+</a>
         </div>
+
+    </div>
+</div>
+
+<div class="reviews-section">
+
+    <h3>Customer Reviews</h3>
+
+    <form method="POST" action="{% url 'add_review' product.id %}">
+        {% csrf_token %}
+
+        <textarea name="comment" placeholder="Write your review..." required></textarea>
+
+        <select name="rating" required>
+            <option value="">Rating</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+        </select>
+
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <div class="review-list">
+
+        {% for review in reviews %}
+        <div class="review-card">
+            <strong>{{ review.user.username }}</strong>
+            <div class="stars">⭐ {{ review.rating }}/5</div>
+            <p>{{ review.comment }}</p>
+        </div>
+        {% empty %}
+        <p>No reviews yet.</p>
+        {% endfor %}
 
     </div>
 
 </div>
+
+<script>
+    let selectedSize = "";
+
+    function selectSize(btn, size) {
+
+        document.querySelectorAll('.size-btn').forEach(b => {
+            b.classList.remove('active');
+        });
+
+        btn.classList.add('active');
+
+        selectedSize = size;
+
+        document.getElementById("form-size").value = size;
+        document.getElementById("cart-size").value = size;
+    }
+
+    function validateSize() {
+        if (!selectedSize) {
+            alert("Please select a size first!");
+            return false;
+        }
+        return true;
+    }
+
+    function goToCheckout() {
+
+        if (!selectedSize) {
+            alert("Please select a size first!");
+            return;
+        }
+
+        const url = `{% url 'checkout' %}?product_id={{ product.id }}&size=` + selectedSize;
+
+        window.location.href = url;
+    }
+</script>
 
 {% endblock %}

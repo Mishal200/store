@@ -133,7 +133,6 @@
         <form method="POST" id="paymentForm">
             {% csrf_token %}
 
-            <!-- COD -->
             <div class="payment-option">
                 <input type="radio" id="cod" name="payment_method"
                        value="COD" required>
@@ -152,7 +151,6 @@
                 </label>
             </div>
 
-            <!-- UPI -->
             <div class="payment-option">
                 <input type="radio" id="upi" name="payment_method"
                        value="RAZORPAY">
@@ -171,7 +169,6 @@
                 </label>
             </div>
 
-            <!-- CARD -->
             <div class="payment-option">
                 <input type="radio" id="card" name="payment_method"
                        value="RAZORPAY">
@@ -204,7 +201,6 @@
 
 </div>
 
-<!-- Razorpay JS -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
@@ -214,13 +210,11 @@ document.getElementById("paymentForm").addEventListener("submit", function(e){
 
     let method = document.querySelector('input[name="payment_method"]:checked').value;
 
-    // COD FLOW
     if(method === "COD"){
         window.location.href = "/orders/order-success/";
         return;
     }
 
-    // RAZORPAY FLOW
     var options = {
         "key": "{{ razorpay_key }}",
         "amount": "{{ payment.amount }}",

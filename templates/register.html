@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.register-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f1f8ff, #ffffff);
+}
+
+.register-card {
+    width: 420px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.register-card h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #333;
+}
+
+.register-card input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.register-card input:focus {
+    border-color: #2874f0;
+    box-shadow: 0 0 5px rgba(40,116,240,0.3);
+}
+
+.register-card label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.register-card button {
+    width: 100%;
+    padding: 12px;
+    background: #2874f0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.register-card button:hover {
+    background: #0b5ed7;
+}
+
+.register-card a {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    color: #2874f0;
+    text-decoration: none;
+}
+
+.register-card a:hover {
+    text-decoration: underline;
+}
+</style>
+
+<div class="register-wrapper">
+
+    <div class="register-card">
+
+        <h1>Create Account</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+
+        <a href="{% url 'login' %}">Already have an account? Login</a>
+
+    </div>
+
+</div>
+
+{% endblock %}
