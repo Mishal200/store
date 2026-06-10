@@ -3,7 +3,6 @@ from django.db.models import Q
 from .models import Product, Review
 from django.contrib.auth.decorators import login_required
 
-
 def product_list(request):
     products = Product.objects.filter(available=True)
 

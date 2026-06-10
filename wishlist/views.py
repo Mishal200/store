@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from products.models import Product
 
-
 def add_to_wishlist(request, product_id):
     wishlist = request.session.get('wishlist', [])
 
@@ -13,7 +12,7 @@ def add_to_wishlist(request, product_id):
     request.session['wishlist'] = wishlist
     request.session.modified = True
 
-    return redirect('wishlist')   # ✅ FIXED
+    return redirect('wishlist')  
 
 def wishlist_detail(request):
     wishlist = request.session.get('wishlist', [])
@@ -35,4 +34,4 @@ def remove_from_wishlist(request, item_id):
     request.session['wishlist'] = wishlist
     request.session.modified = True
 
-    return redirect('wishlist')   # ✅ FIXED
+    return redirect('wishlist')

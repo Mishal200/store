@@ -6,7 +6,6 @@ import razorpay
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
-
 @login_required(login_url='login')
 
 def payment_page(request):
@@ -34,7 +33,6 @@ def payment_page(request):
         "amount": amount,
         "razorpay_key": settings.RAZORPAY_KEY_ID
     })
-
 
 @login_required(login_url='login')
 
@@ -78,7 +76,6 @@ def checkout(request):
     tax = subtotal * Decimal('0.10')
     total = subtotal + shipping + tax
 
-    
     if request.method == 'POST':
         request.session['customer_name'] = request.POST.get('name')
         request.session['phone'] = request.POST.get('phone')
